@@ -62,23 +62,23 @@ public class UserService implements UserSer {
 
     }
 
-    @Override
-    public void deleteUser(Long id) {
-        Optional<User> user = repo.findById(Math.toIntExact(id));
-        if (user.isPresent()) {
-            User user1 = user.get();
-            List<Goal> goals=goalRepo.findByUserId(Math.toIntExact(id));
-            List<Alert> alerts=alertRepo.findByUserId(Math.toIntExact(id));
-            List<HealthData> datas=healthDataRepo.findByUserId(Math.toIntExact(id));
-
-            healthDataRepo.deleteAll(datas);
-            alertRepo.deleteAll(alerts);
-            goalRepo.deleteAll(goals);
-            repo.deleteById(Math.toIntExact(id));
-        }
-        repo.deleteById(Math.toIntExact(id));
-
-    }
+//    @Override
+//    public void deleteUser(Long id) {
+//        Optional<User> user = repo.findById(Math.toIntExact(id));
+//        if (user.isPresent()) {
+//            User user1 = user.get();
+//            List<Goal> goals=goalRepo.findByUserId(Math.toIntExact(id));
+//            List<Alert> alerts=alertRepo.findByUserId(Math.toIntExact(id));
+//            List<HealthData> datas=healthDataRepo.findByUserId(Math.toIntExact(id));
+//
+//            healthDataRepo.deleteAll(datas);
+//            alertRepo.deleteAll(alerts);
+//            goalRepo.deleteAll(goals);
+//            repo.deleteById(Math.toIntExact(id));
+//        }
+//        repo.deleteById(Math.toIntExact(id));
+//
+//    }
 
     @Override
     public UserDto getUserById(Long id) {

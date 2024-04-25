@@ -3,47 +3,55 @@ package com.fitness.myprojectBackend.controller;
 import com.fitness.myprojectBackend.dto.UserDto;
 import com.fitness.myprojectBackend.service.userimpl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("fitness/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-
-
     @PostMapping("/register")
-    public ResponseEntity<UserDto> registerUser(@RequestBody UserDto userDto) {
-        UserDto savedUser=userService.registerUser(userDto);
-        return ResponseEntity.ok(savedUser);
+    public String registerUser(@ModelAttribute UserDto userDto) {
+        userService.registerUser(userDto);
+        // Redirect to the login page after registration
+        return "register";
     }
+
+
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
-        UserDto updatedUser=userService.updateUser(id,userDto);
-        return ResponseEntity.ok(updatedUser);
+    public String updateUser(@PathVariable("id") Long id, @ModelAttribute UserDto userDto) {
+        userService.updateUser(id, userDto);
+        // Redirect to the user profile page after updating
+        return "update profile";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.ok("User deleted successfully");
+//    @DeleteMapping("/delete/{id}")
+//    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
+//        userService.deleteUser(id);
+//        return ResponseEntity.ok("User deleted successfully");
+//    }
+
+    @GetMapping("/{id}")
+    public String getUser(@PathVariable("id") Long id, Model model) {
+        UserDto user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        // Return the user details page
+        return "users";
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users=userService.getAllUsers();
-        return ResponseEntity.ok(users);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable("id") Long id) {
-        UserDto user=userService.getUserById(id);
-        return ResponseEntity.ok(user);
+    public String getAllUsers(Model model) {
+        List<UserDto> users = userService.getAllUsers();
+        model.addAttribute("all", users);
+        // Return the users list page
+        return "users";
     }
 }

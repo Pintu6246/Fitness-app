@@ -4,12 +4,13 @@ import com.fitness.myprojectBackend.dto.GoalDto;
 import com.fitness.myprojectBackend.service.goalimpl.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/fitness/goal")
-@RestController
+@Controller
 public class GoalController {
 
     @Autowired
