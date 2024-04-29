@@ -17,6 +17,9 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String email;
+    
+    @Column(unique = true, nullable = false)
+    private  long phone;
 
     private String pass;
 }

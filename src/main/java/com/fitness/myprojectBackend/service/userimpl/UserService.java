@@ -53,6 +53,7 @@ public class UserService implements UserSer {
             user1.setUsername(userDto.getUsername());
             user1.setEmail(userDto.getEmail());
             user1.setPass(userDto.getPassword());
+            user1.setPhone(userDto.getPhone());
             User savedUser = repo.save(user1);
             return usermapper.toDto(savedUser);
         }
