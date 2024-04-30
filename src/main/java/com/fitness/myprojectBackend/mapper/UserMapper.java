@@ -14,6 +14,7 @@ public class UserMapper {
         UserDto userDto = new UserDto();
         userDto.setUsername(user.getUsername());
         userDto.setEmail(user.getEmail());
+        userDto.setPhone(user.getPhone());
         userDto.setPassword(user.getPass());
         return userDto;
     }
@@ -22,6 +23,7 @@ public class UserMapper {
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
         user.setPass(userDto.getPassword());
         return user;
     }

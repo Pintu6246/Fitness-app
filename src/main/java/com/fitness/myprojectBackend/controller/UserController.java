@@ -2,27 +2,42 @@ package com.fitness.myprojectBackend.controller;
 
 import com.fitness.myprojectBackend.dto.UserDto;
 import com.fitness.myprojectBackend.service.userimpl.UserService;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("fitness/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public String registerUser(@ModelAttribute UserDto userDto) {
-        userService.registerUser(userDto);
-        // Redirect to the login page after registration
+
+    @GetMapping("/register")
+    public String showRegisterPage(Model model) {
+        model.addAttribute("userDto", new UserDto());
         return "register";
     }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("userDto") UserDto userDto) {
+        userService.registerUser(userDto);
+        // Redirect to the login page after registration
+        return "login";
+    }
+
+
 
 
 
@@ -30,19 +45,14 @@ public class UserController {
     public String updateUser(@PathVariable("id") Long id, @ModelAttribute UserDto userDto) {
         userService.updateUser(id, userDto);
         // Redirect to the user profile page after updating
-        return "update profile";
+        return "redirect:/profile.jsp";
     }
 
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-//        userService.deleteUser(id);
-//        return ResponseEntity.ok("User deleted successfully");
-//    }
 
     @GetMapping("/{id}")
     public String getUser(@PathVariable("id") Long id, Model model) {
         UserDto user = userService.getUserById(id);
-        model.addAttribute("user", user);
+        model.addAttribute("all", user);
         // Return the user details page
         return "users";
     }

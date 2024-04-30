@@ -12,5 +12,13 @@
 </head>
 <body>
 
+<form action="http://localhost:8080/fitness/user/home" method="post">
+    Username: <input type="text" name="username" required><br>
+    Email: <input type="email" name="email" required><br>
+    phone: <input type="number" name="phone" required><br>
+    Password: <input type="password" name="password" required><br>
+    <input type="submit" value="update">
+</form>
+
 </body>
 </html>
