@@ -9,4 +9,10 @@ public class UserDto {
     private String phone;
     private String password;
 
+    public UserDto(int id, String username, String email, String phone) {
+    }
+
+    public UserDto() {
+
+    }
 }

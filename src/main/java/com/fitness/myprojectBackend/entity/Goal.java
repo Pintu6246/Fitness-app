@@ -21,3 +21,9 @@ public class Goal {
     private String targetheartrate;
     private String targetsteps;
 }
+/*
+*
+* exercise type
+* calorie
+* overall health score
+* */

@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>User Login</h1>
-<form action="${pageContext.request.contextPath}/user/home" >
-    Username: <input type="text" name="username" required><br>
+<form action="${pageContext.request.contextPath}/login" method="post">
+    Username or Email or Phone: <input type="text" name="identifier" required><br>
     Password: <input type="password" name="password" required><br>
     <input type="submit" value="Login">
 </form>

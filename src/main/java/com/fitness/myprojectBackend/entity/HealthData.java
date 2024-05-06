@@ -24,6 +24,22 @@ public class HealthData {
     private int bloodpressure;
     private String activity;
 //    private int userId;
+/*
+age
+gender
+height
+weight
+sugar levels
+cholestrol
+health
+alchole/smoke
+stress
+spo2
+diet
+caleories
+steps
+
+* */
 
 
 }

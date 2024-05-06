@@ -36,6 +36,15 @@ public class UserService implements UserSer {
     @Autowired
     private HealthDataRepo healthDataRepo;
 
+    public UserDto loginUser(String identifier, String password) {
+        User user = repo.findByUsernameOrEmailOrPhone(identifier, identifier, identifier);
+        if (user != null && password.equals(user.getPass())) {
+            return new UserDto(user.getId(), user.getUsername(), user.getEmail(), user.getPhone());
+        }
+        return null; // Authentication failed
+    }
+
+
     @Override
     public void registerUser(UserDto userDto) {
         if (repo.findByUsername(userDto.getUsername()) == null) {
