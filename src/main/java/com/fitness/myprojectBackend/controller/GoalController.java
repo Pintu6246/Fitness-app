@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/fitness/goal")
+@RequestMapping("/goal")
 @Controller
 public class GoalController {
 
     @Autowired
     private GoalService goalService;
+
+    @GetMapping("/goals")
+    public String showGoals() {
+        return "goaldata";
+    }
 
     @PostMapping("/set/{id}")
     public ResponseEntity<GoalDto> setGoal(@PathVariable("id") int id,@RequestBody GoalDto goalDto) {

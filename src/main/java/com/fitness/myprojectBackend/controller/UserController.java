@@ -23,8 +23,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
     @GetMapping("/register")
     public String showRegisterPage(Model model) {
         model.addAttribute("userDto", new UserDto());
@@ -38,11 +36,16 @@ public class UserController {
         return "login";
     }
 
+    @GetMapping("/profile")
+    public String showProfile() {
+
+        return "profile";
+    }
     @PutMapping("/update/{id}")
     public String updateUser(@PathVariable("id") Long id, @ModelAttribute UserDto userDto) {
         userService.updateUser(id, userDto);
         // Redirect to the user profile page after updating
-        return "redirect:/profile";
+        return "profile";
     }
 
 

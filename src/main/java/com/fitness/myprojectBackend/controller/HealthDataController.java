@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/fitness/health")
+@RequestMapping("/health")
 @Controller
 public class HealthDataController {
 
     @Autowired
     private HealthDataService healthDataService;
+
+    @GetMapping("/healthdata")
+    public String healthData() {
+
+        return "healthdata";
+    }
 
     @GetMapping("/latest/{id}")
     public ResponseEntity<HealthDataDto> getLatestHealthData(@PathVariable("id") Long id) {

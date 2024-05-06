@@ -9,9 +9,9 @@
 <header>
     <nav>
         <ul>
-            <li><a href="profile.jsp">Profile</a></li>
-            <li><a href="healthdata.jsp">Health Data</a></li>
-            <li><a href="goaldata.jsp">Goals</a></li>
+            <li><a href="${pageContext.request.contextPath}/user/profile">Profile</a></li>
+            <li><a href="${pageContext.request.contextPath}/health/healthdata">Health Data</a></li>
+            <li><a href="${pageContext.request.contextPath}/goal/goals">Goals</a></li>
         </ul>
     </nav>
 </header>
