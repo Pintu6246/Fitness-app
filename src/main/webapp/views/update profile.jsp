@@ -1,4 +1,6 @@
-<%--
+<%@ page import="com.fitness.myprojectBackend.entity.User" %>
+<%@ page import="com.fitness.myprojectBackend.mapper.UserMapper" %>
+<%@ page import="com.fitness.myprojectBackend.dto.UserDto" %><%--
   Created by IntelliJ IDEA.
   User: prave
   Date: 25-04-2024
@@ -11,12 +13,14 @@
     <title>update profile</title>
 </head>
 <body>
+<% UserDto loggedInUser = (UserDto)session.getAttribute("loggedInUser");
+    UserMapper mapper = new UserMapper();
+    User user=mapper.toEntity(loggedInUser); %>
 
-<form action="http://localhost:8080/fitness/user/home" method="post">
+<form action="${pageContext.request.contextPath}/user/profile" >
     Username: <input type="text" name="username" required><br>
     Email: <input type="email" name="email" required><br>
     phone: <input type="number" name="phone" required><br>
-    Password: <input type="password" name="password" required><br>
     <input type="submit" value="update">
 </form>
 
