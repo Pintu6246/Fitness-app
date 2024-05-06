@@ -6,6 +6,10 @@
 </head>
 <body>
 <h1>User Login</h1>
+
+<c:if test="${not empty error}">
+    <p style="color:#df6969;">${error}</p>
+</c:if>
 <form action="${pageContext.request.contextPath}/login" method="post">
     Username or Email or Phone: <input type="text" name="identifier" required><br>
     Password: <input type="password" name="password" required><br>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
@@ -26,14 +27,14 @@ public class LoginController {
     public String loginUser(@RequestParam("identifier") String identifier,
                             @RequestParam("password") String password,
                             HttpSession session,
-                            Model model) {
+                             RedirectAttributes redirectAttributes) {
         UserDto userDto = userService.loginUser(identifier, password);
         if (userDto != null) {
             session.setAttribute("loggedInUser", userDto);
             return "home";
         } else {
-            model.addAttribute("error", "Invalid username/email/phone or password");
-            return "login";
+            redirectAttributes.addFlashAttribute("error", "Invalid credentials, please try again");
+            return "redirect:/login";
         }
     }
 
