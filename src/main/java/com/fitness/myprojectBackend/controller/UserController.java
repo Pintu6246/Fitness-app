@@ -123,7 +123,7 @@ public class UserController {
 
         userService.updateUserPass(id.intValue(), userDto);
         // Redirect to the user profile page after updating
-        return "redirect:/user/profile";
+        return "redirect:/user/profile/{id}";
     }
 
 

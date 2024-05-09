@@ -72,7 +72,6 @@ public class UserService implements UserSer {
 
     @Override
     public void updateUser(int id, UserDto userDto) {
-        System.out.println(id);
         Optional<User> user = repo.findById(Math.toIntExact(id));
         if (user.isPresent()) {
             User user1 = user.get();
