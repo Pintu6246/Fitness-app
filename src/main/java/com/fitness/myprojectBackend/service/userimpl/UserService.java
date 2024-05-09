@@ -1,9 +1,6 @@
 package com.fitness.myprojectBackend.service.userimpl;
 
 import com.fitness.myprojectBackend.dto.UserDto;
-import com.fitness.myprojectBackend.entity.Alert;
-import com.fitness.myprojectBackend.entity.Goal;
-import com.fitness.myprojectBackend.entity.HealthData;
 import com.fitness.myprojectBackend.entity.User;
 import com.fitness.myprojectBackend.mapper.UserMapper;
 import com.fitness.myprojectBackend.repositry.AlertRepo;
@@ -58,17 +55,17 @@ public class UserService implements UserSer {
     }
 
     @Override
-    public UserDto updateUser(Long id, UserDto userDto) {
-
+    public void updateUser(int id, UserDto userDto) {
+        System.out.println(id);
         Optional<User> user = repo.findById(Math.toIntExact(id));
         if (user.isPresent()) {
             User user1 = user.get();
             user1.setUsername(userDto.getUsername());
             user1.setEmail(userDto.getEmail());
             user1.setPhone(userDto.getPhone());
-            user1.setPass(userDto.getPassword());
+//            user1.setPass(userDto.getPassword());
             User savedUser = repo.save(user1);
-            return usermapper.toDto(savedUser);
+            usermapper.toDto(savedUser);
         }
         else {
             throw new EntityNotFoundException("User not found with id " + id);
@@ -113,5 +110,6 @@ public class UserService implements UserSer {
     }
 
 
-
+    public void updateUserpass(int i, UserDto userDto) {
+    }
 }

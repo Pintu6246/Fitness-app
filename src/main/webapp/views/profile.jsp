@@ -20,8 +20,6 @@
 
     <%-- Retrieve user details from cookies --%>
     <%
-        UserRepo userRepo = null;
-        User user = new User();
 
 
         Cookie[] cookies = request.getCookies();
@@ -59,7 +57,7 @@
 <div>
     <!-- Account Settings -->
     <h2>Account Settings</h2>
-    <a href="${pageContext.request.contextPath}/user/update">Update pass</a>
+    <a href="${pageContext.request.contextPath}/user/updatepass">Update pass</a>
 
 </div>
 

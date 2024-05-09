@@ -1,9 +1,12 @@
 package com.fitness.myprojectBackend.controller;
 
 import com.fitness.myprojectBackend.dto.UserDto;
+import com.fitness.myprojectBackend.entity.User;
+import com.fitness.myprojectBackend.mapper.UserMapper;
 import com.fitness.myprojectBackend.service.userimpl.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -24,6 +27,8 @@ public class UserController {
 
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    private UserMapper userMapper;
 
 
     @GetMapping("/register")
@@ -50,16 +55,27 @@ public class UserController {
 
 
     @GetMapping("/update/{id}")
-    public <id> String updateUserview(@PathVariable("id")String id) {
+    public String updateUserview(@PathVariable Long id, Model model, HttpServletResponse response) {
+        UserDto user = userService.getUserById(id);
+        model.addAttribute("user", user);
+
 
         return "update profile";
     }
 
     @PutMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") Long id, @ModelAttribute UserDto userDto) {
-        userService.updateUser(id, userDto);
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") UserDto userDto) {
+        userService.updateUser(id.intValue(), userDto);
         // Redirect to the user profile page after updating
-        return "profile";
+        return "redirect:/user/profile";
+    }
+
+
+    @PutMapping("/updatepass/{id}")
+    public String updateUserpass(@PathVariable Long id, @ModelAttribute("user") UserDto userDto) {
+        userService.updateUserpass(id.intValue(), userDto);
+        // Redirect to the user profile page after updating
+        return "redirect:/user/profile";
     }
 
 
@@ -76,7 +92,7 @@ public class UserController {
                 }
             }
         }
-        redirectAttributes.addAttribute("id",id);
+        redirectAttributes.addAttribute("id",Long.parseLong(id));
 
         return "redirect:/user/update/{id}";
     }
