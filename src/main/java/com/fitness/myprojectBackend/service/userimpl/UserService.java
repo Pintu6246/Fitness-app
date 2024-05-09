@@ -54,6 +54,22 @@ public class UserService implements UserSer {
         }
     }
 
+    public void updateUserPass(int id, UserDto userDto) {
+
+        Optional<User> user = repo.findById(Math.toIntExact(id));
+        if (user.isPresent()) {
+            User user1 = user.get();
+            user1.setPass(userDto.getPassword());
+            User savedUser = repo.save(user1);
+            usermapper.toDto(savedUser);
+        }
+        else {
+            throw new EntityNotFoundException("User not found with id " + id);
+        }
+
+    }
+
+
     @Override
     public void updateUser(int id, UserDto userDto) {
         System.out.println(id);
@@ -63,7 +79,6 @@ public class UserService implements UserSer {
             user1.setUsername(userDto.getUsername());
             user1.setEmail(userDto.getEmail());
             user1.setPhone(userDto.getPhone());
-//            user1.setPass(userDto.getPassword());
             User savedUser = repo.save(user1);
             usermapper.toDto(savedUser);
         }
@@ -110,6 +125,5 @@ public class UserService implements UserSer {
     }
 
 
-    public void updateUserpass(int i, UserDto userDto) {
-    }
+
 }

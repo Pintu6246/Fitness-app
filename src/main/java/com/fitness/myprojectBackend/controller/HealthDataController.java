@@ -17,10 +17,10 @@ public class HealthDataController {
     @Autowired
     private HealthDataService healthDataService;
 
-    @GetMapping("/healthdata")
+    @GetMapping("/health-data")
     public String healthData() {
 
-        return "healthdata";
+        return "health data";
     }
 
     @GetMapping("/latest/{id}")

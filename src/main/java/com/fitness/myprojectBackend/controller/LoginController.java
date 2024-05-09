@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,20 +37,16 @@ public class LoginController {
     public String loginUser(@RequestParam("identifier") String identifier,
                             @RequestParam("password") String password,
                             HttpServletResponse response,
-                            RedirectAttributes redirectAttributes) {
+                            RedirectAttributes redirectAttributes,
+                            Model model) {
         UserDto userDto = userService.loginUser(identifier, password);
         User user=userRepo.findByUsernameOrEmailOrPhone(identifier,identifier,identifier);
         String id= String.valueOf(user.getId());
         if (userDto != null) {
-            Cookie usernameCookie = new Cookie("username", user.getUsername());
-            Cookie emailCookie = new Cookie("email", user.getEmail());
-            Cookie phoneCookie = new Cookie("phone", user.getPhone());
             Cookie idCookie = new Cookie("id", id);
-            // Add cookies to the response
-            response.addCookie(usernameCookie);
-            response.addCookie(emailCookie);
-            response.addCookie(phoneCookie);
+
             response.addCookie(idCookie);
+            model.addAttribute("id", id);
             return "home";
         } else {
             redirectAttributes.addFlashAttribute("error", "Invalid credentials, please try again");
