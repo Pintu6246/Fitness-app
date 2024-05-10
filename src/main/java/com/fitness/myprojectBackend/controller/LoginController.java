@@ -22,8 +22,6 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private UserMapper userMapper;
-    @Autowired
     private UserRepo userRepo;
 
     @GetMapping("/login")
@@ -39,14 +37,17 @@ public class LoginController {
                             HttpServletResponse response,
                             RedirectAttributes redirectAttributes,
                             Model model) {
-        UserDto userDto = userService.loginUser(identifier, password);
         User user=userRepo.findByUsernameOrEmailOrPhone(identifier,identifier,identifier);
-        String id= String.valueOf(user.getId());
-        if (userDto != null) {
-            Cookie idCookie = new Cookie("id", id);
 
+        if (user != null && PasswordEncoderUtil.checkPassword(password,user.getPass())) {
+
+            String id= String.valueOf(user.getId());
+
+            Cookie idCookie = new Cookie("id", id);
             response.addCookie(idCookie);
+
             model.addAttribute("id", id);
+
             return "home";
         } else {
             redirectAttributes.addFlashAttribute("error", "Invalid credentials, please try again");

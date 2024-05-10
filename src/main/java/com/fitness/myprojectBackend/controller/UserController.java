@@ -1,7 +1,6 @@
 package com.fitness.myprojectBackend.controller;
 
 import com.fitness.myprojectBackend.dto.UserDto;
-import com.fitness.myprojectBackend.mapper.UserMapper;
 import com.fitness.myprojectBackend.service.userimpl.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,10 +50,11 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("userDto") UserDto userDto,Model model) {
+
+        String encryptedPassword = PasswordEncoderUtil.encodePassword(userDto.getPassword());
+        userDto.setPassword(encryptedPassword);
+
         userService.registerUser(userDto);
-
-
-        // Redirect to the login page after registration
         return "login";
     }
 
@@ -107,7 +107,7 @@ public class UserController {
         return "redirect:/user/update-pass/{id}";
     }
     @GetMapping("/update-pass/{id}")
-    public String updateUserpassview(@PathVariable Long id,Model model,RedirectAttributes redirectAttributes) {
+    public String updateUserpassview(@PathVariable Long id,Model model) {
         UserDto userDto = userService.getUserById(id);
         model.addAttribute("userDto", userDto);
 
@@ -118,8 +118,10 @@ public class UserController {
     @PutMapping("/update-pass/{id}")
     public String updateUserPass(@PathVariable Long id) {
         UserDto userDto = userService.getUserById(id);
+
         userDto.setPassword(request.getParameter("newPassword"));
-//        System.out.println(userDto.getEmail());
+        String encryptedPassword = PasswordEncoderUtil.encodePassword(userDto.getPassword());
+        userDto.setPassword(encryptedPassword);
 
         userService.updateUserPass(id.intValue(), userDto);
         // Redirect to the user profile page after updating
