@@ -14,7 +14,7 @@
         <ul>
 
             <li><a href="${pageContext.request.contextPath}/user/profile/${id}">Profile</a></li>
-            <li><a href="${pageContext.request.contextPath}/health/healthdata">Health Data</a></li>
+            <li><a href="${pageContext.request.contextPath}/health/all/${id}">Health Data</a></li>
             <li><a href="${pageContext.request.contextPath}/goal/goals">Goals</a></li>
         </ul>
     </nav>

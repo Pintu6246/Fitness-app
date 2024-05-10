@@ -7,7 +7,12 @@
 </head>
 <body>
 <h1>Health Data</h1>
-<div id="chartContainer"><!-- Display health data visualization here --></div>
-<a href="addhealthdata.jsp">Add Health Data</a>
+<div id="chartContainer">
+
+${healthData}
+</div>
+<a href="${pageContext.request.contextPath}/health/all/${id}">All Health Data</a><br>
+<a href="${pageContext.request.contextPath}/health/latest/${id}">Latest Health Data</a><br>
+<a href="${pageContext.request.contextPath}/health/submit/${id}">Add Health Data</a><br>
 </body>
 </html>

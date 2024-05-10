@@ -6,6 +6,7 @@ import com.fitness.myprojectBackend.service.healthdataimpl.HealthDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +18,29 @@ public class HealthDataController {
     @Autowired
     private HealthDataService healthDataService;
 
-    @GetMapping("/health-data")
-    public String healthData() {
-
+    @GetMapping("/latest/{id}")
+    public String  getLatestHealthData(@PathVariable("id") Long id,Model model) {
+        HealthDataDto healthDataDto = healthDataService.getLatestHealthData(id);
+        model.addAttribute("healthData", healthDataDto);
         return "health data";
     }
 
-    @GetMapping("/latest/{id}")
-    public ResponseEntity<HealthDataDto> getLatestHealthData(@PathVariable("id") Long id) {
-        HealthDataDto healthDataDto = healthDataService.getLatestHealthData(id);
-        return ResponseEntity.ok(healthDataDto);
-    }
-
     @GetMapping("/all/{id}")
-    public ResponseEntity<List<HealthDataDto>> getAllHealthData(@PathVariable("id") Long id) {
+    public String  getAllHealthData(@PathVariable("id") Long id, Model model) {
         List<HealthDataDto> allHealthData = healthDataService.getAllHealthData(id);
-        return ResponseEntity.ok(allHealthData);
+        model.addAttribute("healthData", allHealthData);
+        return "health data";
     }
 
+
+    @GetMapping("/submit/{id}")
+    public String submitViewHealthData(@PathVariable int id) {
+
+        return "add-health-data";
+    }
     @PostMapping("/submit/{id}")
-    public ResponseEntity<HealthDataDto> submitHealthData(@PathVariable int id,@RequestBody HealthDataDto healthDataDto) {
-        HealthDataDto savedData= healthDataService.submitHealthData((long) id,healthDataDto);
-        return ResponseEntity.ok(savedData);
+    public String  submitHealthData(@PathVariable int id, HealthDataDto healthDataDto) {
+        healthDataService.submitHealthData(id,healthDataDto);
+        return "redirect:/health/all/"+id;
     }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Add Health Data</h1>
-<form action="addhealthdata" method="post">
+<form action="${pageContext.request.contextPath}/health/submit/${id}" method="post">
     Timestamp: <input type="datetime-local" name="timestamp" required><br>
     Heart Rate: <input type="number" name="heartRate" required><br>
     Blood Pressure: <input type="text" name="bloodPressure" required><br>

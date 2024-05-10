@@ -22,7 +22,7 @@ public class HealthDataService implements HealthDataSer {
     private HealthDataMapper hdmapper;
 
     @Override
-    public HealthDataDto submitHealthData(Long id,HealthDataDto healthDataDto) {
+    public HealthDataDto submitHealthData(int id,HealthDataDto healthDataDto) {
 
         HealthData hd =hdmapper.toEntity(Math.toIntExact(id),healthDataDto);
         HealthData saved = hdrepo.save(hd);
@@ -35,8 +35,8 @@ public class HealthDataService implements HealthDataSer {
     public HealthDataDto getLatestHealthData(Long userId) {
         List<HealthData> healthData=hdrepo.findByUserIdOrderByIdDesc(Math.toIntExact(userId));
         if(!healthData.isEmpty()){
-            HealthData latesthd=healthData.get(0);
-            return hdmapper.toDto(latesthd);
+            HealthData latest=healthData.get(0);
+            return hdmapper.toDto(latest);
         }
         else {
             throw new EntityNotFoundException("No health data found for user id "+userId);
