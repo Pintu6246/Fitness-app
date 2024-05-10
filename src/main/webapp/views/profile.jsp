@@ -57,7 +57,7 @@
     <!-- Health Data Overview -->
     <h2>Health Data Overview</h2>
     <!-- Add charts or visualizations for health data -->
-    <a href="${pageContext.request.contextPath}/health/health-data">View Detailed Health Data</a>
+    <a href="${pageContext.request.contextPath}/health/all/${id}">View Detailed Health Data</a>
 </div>
 
 <hr>

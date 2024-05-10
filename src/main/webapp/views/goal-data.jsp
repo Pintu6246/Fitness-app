@@ -7,7 +7,9 @@
 </head>
 <body>
 <h1>Goal Data</h1>
-<div id="chartContainer"><!-- Display goal data visualization here --></div>
-<a href="addgoal.jsp">Add Goal</a>
+<div id="chartContainer">
+    ${goals}
+</div>
+<a href="${pageContext.request.contextPath}/goal/set/${id}">Add Goal</a>
 </body>
 </html>
