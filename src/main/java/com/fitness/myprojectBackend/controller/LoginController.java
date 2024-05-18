@@ -1,8 +1,6 @@
 package com.fitness.myprojectBackend.controller;
 
-import com.fitness.myprojectBackend.dto.UserDto;
 import com.fitness.myprojectBackend.entity.User;
-import com.fitness.myprojectBackend.mapper.UserMapper;
 import com.fitness.myprojectBackend.repositry.UserRepo;
 import com.fitness.myprojectBackend.service.userimpl.UserService;
 import jakarta.servlet.http.Cookie;
@@ -25,7 +23,7 @@ public class LoginController {
     private UserRepo userRepo;
 
     @GetMapping("/login")
-    public String loginUserget(){
+    public String loginUserGet(){
 
         return "login";
     }

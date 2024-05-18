@@ -29,16 +29,16 @@ age
 gender
 height
 weight
-sugar levels
-cholestrol
-health
+*
+
+
 alchole/smoke
 stress
-spo2
-diet
-caleories
-steps
 
+diet
+
+steps
+spo2
 * */
 
 

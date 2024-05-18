@@ -1,5 +1,7 @@
 package com.fitness.myprojectBackend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fitness.myprojectBackend.dto.GoalDto;
 import com.fitness.myprojectBackend.service.goalimpl.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,14 @@ public class GoalController {
     @GetMapping("/goals/{id}")
     public String getGoals(@PathVariable("id") Long userId,Model model) {
         List<GoalDto> goals = goalService.getGoals(userId);
-        model.addAttribute("goals", goals);
+        ObjectMapper mapper = new ObjectMapper();
+        String goalsJson ="";
+        try {
+            goalsJson=mapper.writeValueAsString(goals);
+        }catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("goalsJson", goalsJson);
         return "goal-data";
     }
 

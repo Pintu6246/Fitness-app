@@ -33,9 +33,9 @@ public class HealthDataService implements HealthDataSer {
 
     @Override
     public HealthDataDto getLatestHealthData(Long userId) {
-        List<HealthData> healthData=hdrepo.findByUserIdOrderByIdDesc(Math.toIntExact(userId));
+        List<HealthData> healthData=hdrepo.findByUserIdOrderByTimestamp(Math.toIntExact(userId));
         if(!healthData.isEmpty()){
-            HealthData latest=healthData.get(0);
+            HealthData latest=healthData.getFirst();
             return hdmapper.toDto(latest);
         }
         else {

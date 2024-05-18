@@ -10,5 +10,7 @@ import java.util.List;
 public interface HealthDataRepo extends JpaRepository<HealthData, Integer> {
     List<HealthData> findByUserIdOrderByIdDesc(int user_id);
 
+    List<HealthData> findByUserIdOrderByTimestamp(int id);
+
     List<HealthData> findByUserId(int user_id);
 }
