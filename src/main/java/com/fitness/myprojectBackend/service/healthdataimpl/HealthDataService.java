@@ -22,11 +22,11 @@ public class HealthDataService implements HealthDataSer {
     private HealthDataMapper hdmapper;
 
     @Override
-    public HealthDataDto submitHealthData(int id,HealthDataDto healthDataDto) {
+    public void submitHealthData(int id, HealthDataDto healthDataDto) {
 
         HealthData hd =hdmapper.toEntity(Math.toIntExact(id),healthDataDto);
         HealthData saved = hdrepo.save(hd);
-        return hdmapper.toDto(saved);
+        hdmapper.toDto(saved);
 
     }
 
@@ -35,7 +35,7 @@ public class HealthDataService implements HealthDataSer {
     public HealthDataDto getLatestHealthData(Long userId) {
         List<HealthData> healthData=hdrepo.findByUserIdOrderByTimestamp(Math.toIntExact(userId));
         if(!healthData.isEmpty()){
-            HealthData latest=healthData.getFirst();
+            HealthData latest=healthData.getLast();
             return hdmapper.toDto(latest);
         }
         else {

@@ -1,6 +1,9 @@
 package com.fitness.myprojectBackend.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fitness.myprojectBackend.dto.HealthDataDto;
 import com.fitness.myprojectBackend.service.healthdataimpl.HealthDataService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +24,32 @@ public class HealthDataController {
     @GetMapping("/latest/{id}")
     public String  getLatestHealthData(@PathVariable("id") Long id,Model model) {
         HealthDataDto healthDataDto = healthDataService.getLatestHealthData(id);
-        model.addAttribute("healthData", healthDataDto);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String health ="";
+        try {
+            health=mapper.writeValueAsString(healthDataDto);
+        }catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("healthData", health);
         return "health data";
     }
 
     @GetMapping("/all/{id}")
     public String  getAllHealthData(@PathVariable("id") Long id, Model model) {
         List<HealthDataDto> allHealthData = healthDataService.getAllHealthData(id);
-        model.addAttribute("healthData", allHealthData);
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String health ="";
+        try {
+            health=mapper.writeValueAsString(allHealthData);
+        }catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        System.out.println("healthJson ="+health);
+        model.addAttribute("healthData",health);
         return "health data";
     }
 

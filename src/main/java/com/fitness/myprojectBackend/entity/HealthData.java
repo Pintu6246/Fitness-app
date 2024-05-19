@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,26 +21,16 @@ public class HealthData {
     private User user;
 
     private LocalDateTime timestamp;
+    private int age;
+    private int weight;
+    private int height;
+    private String gender;
+    private String alcoholOrSmoke;
+    private String stress;
+    private String diet;
     private int heartrate;
     private int bloodpressure;
     private String activity;
-//    private int userId;
-/*
-age
-gender
-height
-weight
-*
-
-
-alchole/smoke
-stress
-
-diet
-
-steps
-spo2
-* */
 
 
 }

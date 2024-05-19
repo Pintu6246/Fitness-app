@@ -22,6 +22,15 @@ public class HealthDataMapper {
         healthDataDto.setTimestamp(healthData.getTimestamp());
         healthDataDto.setHeartRate(healthData.getHeartrate());
         healthDataDto.setBloodPressure(healthData.getBloodpressure());
+
+        healthDataDto.setAge(healthData.getAge());
+        healthDataDto.setWeight(healthData.getWeight());
+        healthDataDto.setHeight(healthData.getHeight());
+        healthDataDto.setGender(healthData.getGender());
+        healthDataDto.setAlcoholOrSmoke(healthData.getAlcoholOrSmoke());
+        healthDataDto.setStress(healthData.getStress());
+        healthDataDto.setDiet(healthData.getDiet());
+
         healthDataDto.setActivityLevel(String.valueOf(healthData.getActivity()));
         return healthDataDto;
     }
@@ -35,6 +44,15 @@ public class HealthDataMapper {
         healthData.setTimestamp(healthDataDto.getTimestamp());
         healthData.setHeartrate(healthDataDto.getHeartRate());
         healthData.setBloodpressure(healthDataDto.getBloodPressure());
+
+        healthData.setAge(healthDataDto.getAge());
+        healthData.setWeight(healthDataDto.getWeight());
+        healthData.setHeight(healthDataDto.getHeight());
+        healthData.setGender(healthDataDto.getGender());
+        healthData.setAlcoholOrSmoke(healthDataDto.getAlcoholOrSmoke());
+        healthData.setStress(healthDataDto.getStress());
+        healthData.setDiet(healthDataDto.getDiet());
+
         healthData.setActivity(healthDataDto.getActivityLevel());
 
 
